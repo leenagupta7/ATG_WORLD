@@ -4,7 +4,7 @@ import Group3 from '../Images/Group3.png';
 import CloseIcon from '@mui/icons-material/Close';
 import facebook from '../Images/facebook.webp';
 import google from '../Images/google.png';
-
+import axios from 'axios';
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [isSignIn, setIsSignIn] = useState(false); // State to track if in sign-in mode
@@ -19,33 +19,27 @@ const Home = () => {
     setIsSignIn(false); // Ensure create account mode
   };
 
-  const handleSignInClick = () => {
-    setShowPopup(true);
-    setIsSignIn(true); // Set sign-in mode
-  };
-
   const handleClosePopup = () => {
     setShowPopup(false);
   };
+  const Baseurl = import.meta.env.VITE_API_BASE_URL;
+  const handleSignUp = async() => {
 
-  const handleSignUp = () => {
-    // Validation: Ensure passwords match
     if (password !== confirmPassword) {
       alert('Passwords do not match. Please check and try again.');
       return;
     }
-
-    // Store user details in localStorage
-    const userDetails = {
-      firstName,
-      lastName,
-      email,
-      password, // Note: For real applications, passwords should be hashed before storing.
-    };
-
-    localStorage.setItem('userDetails', JSON.stringify(userDetails));
-
-    // Close popup and reset form fields
+    try{
+      const formdata = new FormData();
+      formdata.append('name',`${firstName} ${lastName}`);
+      formdata.append('email',email);
+      formdata.append('password',password);
+      console.log('formdata',formdata);
+      const data = await axios.post(`${Baseurl}/signup`,formdata);
+      console.log(data);
+    }catch(err){
+      console.log('err in signup frontend',err);
+    }
     setShowPopup(false);
     setFirstName('');
     setLastName('');
@@ -110,7 +104,7 @@ const Home = () => {
                       onChange={(e) => setFirstName(e.target.value)}
                     />
                     <input
-                      className="border p-2 bg-gray-100 w-64"
+                      className="border p-2 bg-gray-100 w-64 z-50"
                       placeholder="Last Name"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
@@ -173,7 +167,7 @@ const Home = () => {
                   </div>
                 </div>
               )}
-              <div className="hidden md:flex items-center justify-center">
+              <div className="z-5 hidden md:flex items-center justify-center">
                 <img src={Group3} alt="Graphic" />
               </div>
             </div>
