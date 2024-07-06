@@ -124,7 +124,7 @@ const Elements = () => {
             <span className="md:hidden">Join</span> {/* Show on mobile */}
           </div>
         ) : (
-          <div className="cursor-pointer flex items-center bg-gray-400 text-white p-2  md:mt-0"> {/* Adjust margin for mobile */}
+          <div onClick={()=>localStorage.clear()} className="cursor-pointer flex items-center bg-gray-400 text-white p-2  md:mt-0"> {/* Adjust margin for mobile */}
             <GroupsIcon />
             <span className="hidden md:inline">Leave a group</span> {/* Hide on mobile */}
             <span className="md:hidden">Leave</span> {/* Show on mobile */}

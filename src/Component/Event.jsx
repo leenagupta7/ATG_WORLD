@@ -99,7 +99,7 @@ const formattedCreatedAt = formatDate(props.item.createdAt);
           <div className="flex items-center text-gray-500 space-x-2">
           {props.item && props.item.like && props.item.like.includes(userId)?
             (<ThumbUpIcon className="text-blue-400 cursor-pointer ml-4 mr-2" onClick={()=>props.handleunlike(props.item._id)}/>)
-            :( <ThumbUpOffAltIcon className="text-gray-500 cursor-pointer ml-4 mr-2" onClick={()=>props.handlelike(props.item._id)}/>)}
+            :( <ThumbUpOffAltIcon className="text-gray-500 cursor-pointer ml-4 mr-2" onClick={()=>{if(userId){props.handlelike(props.item._id)}}}/>)}
             <span>{props.item.like.length} like</span>
           </div>
           {userId===props.item.userId._id && ( <div className="bg-gray-100 rounded-full p-1">

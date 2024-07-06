@@ -41,7 +41,9 @@ const Navbar = () => {
       console.log(response);
       localStorage.setItem('userDetail', response.data.data.user.id);
       localStorage.setItem('usertoken', response.data.token);
+      alert('signup succesfully');
     } catch (error) {
+      alert('error');
       console.error('Error:', error);
     }
     // Close popup and reset form fields
@@ -71,6 +73,7 @@ const Navbar = () => {
       alert('Password updated successfully');
       handleClosePopup();
     } catch (err) {
+      alert('error');
       console.error('Error updating password:', err);
     }
   };
@@ -81,8 +84,9 @@ const Navbar = () => {
       localStorage.clear();
       localStorage.setItem('userDetail', response.data.data.user.id);
       localStorage.setItem('usertoken', response.data.token);
-
+      alert('signIN sucessfully')
     } catch (err) {
+      alert('error');
       console.log('error', err);
     }
     setShowPopup(false);
@@ -229,7 +233,7 @@ const Navbar = () => {
                 )}
               </div>)}
 
-              <div className="hidden md:flex flex items-center justify-center">
+              <div className="hidden md:flex flex items-center justify-center mt-6">
                 <img src={Group3} alt="Graphic" />
               </div>
             </div>
